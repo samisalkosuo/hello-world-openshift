@@ -1,0 +1,112 @@
+# hello-world-openshift
+
+"Hello World!" development/deployment using OpenShift.
+
+"There's more than one way to do it" and here is one.
+
+link:pdf/OpenShift_deployments_20210322.pdf[OpenShift_deployments_20210322.pdf]
+
+## Demo deployments CLI
+
+### Source in GitHub
+
+* public repository
+** personal development or third party sources
+* login to OpenShift as developer
+* create new project+
+** `oc new-project demoapp`
+* create application from source:
+** `oc new-app https://github.com/samisalkosuo/nodejs-sample#dev -l app=nodeapp --name nodeapp -e APP_NAME=nodepp -e DEBUG=true`
+** URL to GitHub
+** `#dev` specifies git-branch
+** -l adds custom label
+** --name sets application name
+** -e parameters configures env variables for container
+* check build status
+** `oc get pods`
+** `oc get all`
+* view build logs:
+** `oc logs <pod>`
+* view services
+** `oc get svc`
+* expose service
+** `oc expose svc <svcname>`
+* get route
+** `oc get routes`
+* go to route
+
+* update application, make change in source code and push to repo
+* update:
+** `oc start-build nodeapp`
+
+
+### Image in registry
+
+* typically existing images in registry
+* login to OpenShift as developer
+* create new project
+** `oc new-project avatar`
+* create application from image:
+** `oc new-app --docker-image=docker.io/kazhar/avatar-server:0.1 -l app=avatar-server --name avatar-server  -e DEBUG=true`
+* Update
+** tag new image to imagestream (imagestreams are OpenShift concept that reference images in registries)
+** `oc tag docker.io/kazhar/avatar-server:0.4 avatar-server:0.4`
+** edit deployment
+** `oc edit deployment avatar-server`
+** find entry: `image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"avatar-server:0.1"`
+** change tag to new tag, for example: avatar-server:0.4
+
+
+### Source locally
+
+* clone source repo, downloading code does not work because git repo is required here (this uses S2I)
+** `git clone https://github.com/samisalkosuo/hello-world-nodejs`
+* `oc new-project hello-world`
+* create new-app build
+** `oc new-app . --name=hello-world`
+* expose service:
+** `oc expose svc/hello-world`
+* get route
+** `oc get routes`
+* go to route
+* update:
+** `oc start-build hello-world --from-dir=.`
+
+
+## Demo deployments GUI
+
+* Login to OpenShift GUI as developer
+
+### Dockerfile in GitHub
+
+* Click `+Add`
+* Select `From Dockerfile`
+* Repo: https://github.com/samisalkosuo/nodejs-sample
+* Advanced git options: branch "dev"
+* See other options
+* Click Create
+
+## Image in registry
+
+* Click `+Add`
+* Select `From Container Image`
+* Image: kazhar/avatar-server:0.1
+
+* Update
+* Developer Perspective -> Topology -> Avatar server -> Actions -> Edit avatar-server
+* change image tag
+
+### Source in GitHub
+
+* Create project `demoapp2`
+* Open Developer-perspective
+* Click `+Add`
+* Select `From Git`
+* Uses Source2Image
+* Repo URL: 
+** https://github.com/samisalkosuo/hello-world-nodejs
+* Select "node.js" as builder image
+* See other options
+* Click Create
+
+
