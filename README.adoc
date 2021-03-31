@@ -76,6 +76,7 @@ link:pdf/OpenShift_deployments_20210322.pdf[OpenShift_deployments_20210322.pdf]
 == Demo deployments GUI
 
 * Login to OpenShift GUI as developer
+* Create new project
 
 === Dockerfile in GitHub
 
