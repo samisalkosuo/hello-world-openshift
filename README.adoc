@@ -1,4 +1,6 @@
-# hello-world-openshift
+= hello-world-openshift
+:toc: left
+:toc-title: Table of Contents
 
 "Hello World!" development/deployment using OpenShift.
 
@@ -6,9 +8,9 @@
 
 link:pdf/OpenShift_deployments_20210322.pdf[OpenShift_deployments_20210322.pdf]
 
-## Demo deployments CLI
+== Demo deployments CLI
 
-### Source in GitHub
+=== Source in GitHub
 
 * public repository
 ** personal development or third party sources
@@ -39,8 +41,7 @@ link:pdf/OpenShift_deployments_20210322.pdf[OpenShift_deployments_20210322.pdf]
 * update:
 ** `oc start-build nodeapp`
 
-
-### Image in registry
+=== Image in registry
 
 * typically existing images in registry
 * login to OpenShift as developer
@@ -56,8 +57,7 @@ link:pdf/OpenShift_deployments_20210322.pdf[OpenShift_deployments_20210322.pdf]
 ** find entry: `image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"avatar-server:0.1"`
 ** change tag to new tag, for example: avatar-server:0.4
 
-
-### Source locally
+=== Source locally
 
 * clone source repo, downloading code does not work because git repo is required here (this uses S2I)
 ** `git clone https://github.com/samisalkosuo/hello-world-nodejs`
@@ -73,11 +73,11 @@ link:pdf/OpenShift_deployments_20210322.pdf[OpenShift_deployments_20210322.pdf]
 ** `oc start-build hello-world --from-dir=.`
 
 
-## Demo deployments GUI
+== Demo deployments GUI
 
 * Login to OpenShift GUI as developer
 
-### Dockerfile in GitHub
+=== Dockerfile in GitHub
 
 * Click `+Add`
 * Select `From Dockerfile`
@@ -86,7 +86,7 @@ link:pdf/OpenShift_deployments_20210322.pdf[OpenShift_deployments_20210322.pdf]
 * See other options
 * Click Create
 
-## Image in registry
+== Image in registry
 
 * Click `+Add`
 * Select `From Container Image`
@@ -96,7 +96,7 @@ link:pdf/OpenShift_deployments_20210322.pdf[OpenShift_deployments_20210322.pdf]
 * Developer Perspective -> Topology -> Avatar server -> Actions -> Edit avatar-server
 * change image tag
 
-### Source in GitHub
+== Source in GitHub
 
 * Create project `demoapp2`
 * Open Developer-perspective
