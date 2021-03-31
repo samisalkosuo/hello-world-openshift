@@ -4,9 +4,9 @@
 
 "Hello World!" development/deployment using OpenShift.
 
-"There's more than one way to do it" and here is one.
-
 link:pdf/OpenShift_deployments_20210322.pdf[OpenShift_deployments_20210322.pdf]
+
+"There's more than one way to do it" and here is one.
 
 == Demo deployments CLI
 
